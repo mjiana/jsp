@@ -1,39 +1,70 @@
-package chapter10;
+package ch11;
 
+import java.util.*;
 import java.sql.*;
 
+//DAO
 public class MemberMgr {
-
-	private DBConnectionMgr pool;
+	private DBConnectionMgr pool = null;
 	
 	public MemberMgr() {
 		try {
 			pool = DBConnectionMgr.getInstance();
 		} catch (Exception e) {
-			System.out.println("Error 커넥션 연결 실패 \n "+e);
+			System.out.println("커넥션 실패 : "+e);
 		}
-	}//MemberMgr() end
+	}//생성자 end
 	
-	public boolean passCheck(String cust_id, String cust_pw) {
+	//ID중복체크
+	public boolean checkId(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		boolean result = false;
+		boolean checkCon = false;
 		
 		try {
 			con = pool.getConnection();
-			String query = "select count(*) from member where id=? and passwd=?";
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, cust_id);
-			pstmt.setString(2, cust_pw);
+			String strQuery = "select id from member where id = ?";
+			pstmt = con.prepareStatement(strQuery);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
-			rs.next();
-			if(rs.getInt(1)>0) result = true;
+			checkCon = rs.next();
 		} catch (Exception e) {
 			System.out.println("Exception : "+e);
 		} finally {
 			pool.freeConnection(con, pstmt, rs);
 		}
-		return result;
-	}//passCheck end
-}//class end
+		return checkCon;
+	}//checkId end
+	
+	//우편번호
+	public Vector zipcodeRead(String area3) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Vector vecList = new Vector();
+		
+		try {
+			con = pool.getConnection();
+			// ?를 사용할 수 없다. stmt를 사용해도 무방
+			String strQuery = 
+					"select * from zipcode where area3 like '"+area3+"%'";
+			pstmt = con.prepareStatement(strQuery);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ZipcodeBean tempZipcode = new ZipcodeBean();
+				tempZipcode.setZipcode(rs.getString("zipcode"));
+				tempZipcode.setArea1(rs.getString("area1"));
+				tempZipcode.setArea2(rs.getString("area2"));
+				tempZipcode.setArea3(rs.getString("area3"));
+				tempZipcode.setArea4(rs.getString("area4"));
+				vecList.addElement(tempZipcode);
+			}//while end
+		} catch (Exception e) {
+			System.out.println("zipcode Exception : "+e);
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return vecList;
+	}
+}

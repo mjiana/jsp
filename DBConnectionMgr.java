@@ -1,3 +1,4 @@
+package ch11;
 /**
  * Copyright(c) 2001 iSavvix Corporation (http://www.isavvix.com/)
  *
@@ -23,8 +24,6 @@
  *
  */
 
-
-package chapter10;
 
 import java.sql.*;
 import java.util.Properties;

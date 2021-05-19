@@ -1,4 +1,4 @@
-package chapter09;
+package ch11;
 
 public class RegisterBean {
 	private String mem_id;
