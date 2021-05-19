@@ -6,7 +6,7 @@
 <meta charset="EUC-KR">
 <title>회원가입</title>
 <link rel="stylesheet" type="text/css" href="style.css">
-<script type="text/javascript" src="script.js"></script>
+<script type="text/javascript" src="Reg_script.js"></script>
 </head>
 <body onload="regForm.mem_id.focus()">
 <br><br>
