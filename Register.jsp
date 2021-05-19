@@ -19,6 +19,7 @@
 		<td width="15%">아이디</td>
 		<td width="45%">
 			<input type="text" name="mem_id" id="mem_id" size="20">
+			<input type="hidden" name="idCk" value="no">
 			<input type="button" value="ID중복확인" onclick="idCheck(this.form.mem_id.value)">
 		</td>
 		<td width="35%">아이디를 영어와 숫자로 적어주세요</td>

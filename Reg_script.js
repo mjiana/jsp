@@ -14,7 +14,7 @@ function idCheck(id){
 		alert("아이디 중복확인을 해주세요");
 		df.mem_id.focus();
 	}else{
-		//df.idCk.value="yes";
+		df.idCk.value="yes";
 		//document.getElementById('mem_id').readOnly = true;
 		url = "IdCheck.jsp?mem_id="+id;
 		window.open(url,"IDcheck","width=350,height=200");
