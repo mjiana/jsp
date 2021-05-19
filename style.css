@@ -1,0 +1,27 @@
+/* .은 클래스를 의미 : 본래의미는 디자인 적용 */
+.d1{
+	width: 90%;
+	height: 90%;
+	align-content:center;
+	border: 1px solid green;
+	background-color: lime;	
+}
+/* #은 id를 의미 : 본래 js요소 구별용 */
+#d2{
+	width: 80%;
+	height: 80%;
+	border: 1px solid orange;
+	background-color: yellow;	
+}
+/* 태그를 의미한다. */
+table{
+	align: center;
+	padding: 3px;
+	border:1px;
+	border-spacing: 0px;
+	border-width: 5px;
+}
+td{
+	color:navy;
+	border:3px;
+}
