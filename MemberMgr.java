@@ -1,56 +1,39 @@
-package chapter09;
+package chapter10;
 
 import java.sql.*;
-import java.util.*;
-import chapter09.RegisterBean;
 
 public class MemberMgr {
-	public final String JDBC_DRIVER = "org.gjt.mm.mysql.Driver";
-	public final String JDBC_URL = "jdbc:mysql://localhost:3306/jspdb";
-	public final String USER = "jspuser";
-	public final String PASS = "1234";
+
+	private DBConnectionMgr pool;
 	
 	public MemberMgr() {
 		try {
-			Class.forName(JDBC_DRIVER);
+			pool = DBConnectionMgr.getInstance();
 		} catch (Exception e) {
-			System.out.println("JDBC드라이버 로딩 실패 "+e);
+			System.out.println("Error 커넥션 연결 실패 \n "+e);
 		}
 	}//MemberMgr() end
 	
-	public Vector getMemberList() {
+	public boolean passCheck(String cust_id, String cust_pw) {
 		Connection con = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		Vector vecList = new Vector();
+		boolean result = false;
 		
 		try {
-			con = DriverManager.getConnection(JDBC_URL, USER, PASS);
-			String strQuery = "select * from member";
-			stmt = con.createStatement();
-			rs = stmt.executeQuery(strQuery);
-			while(rs.next()) {
-				RegisterBean rb = new RegisterBean();
-				rb.setMem_id(rs.getString("id"));
-				rb.setMem_passwd(rs.getString("passwd"));
-				rb.setMem_name(rs.getString("name"));
-				rb.setMem_num1(rs.getString("mem_num1"));
-				rb.setMem_num2(rs.getString("mem_num2"));
-				rb.setMem_email(rs.getString("e_mail"));
-				rb.setMem_phone(rs.getString("phone"));
-				rb.setMem_zipcode(rs.getString("zipcode"));
-				rb.setMem_address(rs.getString("address"));
-				rb.setMem_job(rs.getString("job"));
-				vecList.add(rb);
-			}//while end
+			con = pool.getConnection();
+			String query = "select count(*) from member where id=? and passwd=?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, cust_id);
+			pstmt.setString(2, cust_pw);
+			rs = pstmt.executeQuery();
+			rs.next();
+			if(rs.getInt(1)>0) result = true;
 		} catch (Exception e) {
-			System.out.println("Exception "+e);
+			System.out.println("Exception : "+e);
 		} finally {
-			if(rs != null) try{ rs.close(); } catch(SQLException ex) {}
-			if(stmt != null) try{ stmt.close(); } catch(SQLException ex) {}
-			if(con != null) try{ con.close(); } catch(SQLException ex) {}
-		} //finally end
-		return vecList;
-	}//getMemberList() end
-	
+			pool.freeConnection(con, pstmt, rs);
+		}
+		return result;
+	}//passCheck end
 }//class end

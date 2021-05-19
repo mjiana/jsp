@@ -24,7 +24,7 @@
  */
 
 
-package ch09;
+package chapter10;
 
 import java.sql.*;
 import java.util.Properties;

@@ -1,14 +1,22 @@
-body{ 
-	background-color:#ffffcc; 
-	color: #464646;
+body{
+	
+	margin-top: 100px;
 }
-table{ 
-	text-align:center; 
-	width:100%; 
+table{
+	background-color: #dbffce;
+	text-align: center;
 }
-table, td{
+td{
+	border: 1px solid green;
+	text-align: center;
 	border-collapse: collapse;
-	border:2px solid #ffea57;
-	margin:auto;
-	padding: 0px;
 }
+input {
+	border: 1px solid green;
+	
+	color: black;
+}
+a{
+	color: #299500;
+	text-decoration: none;
+}/* #d62929;*/
