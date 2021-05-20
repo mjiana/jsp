@@ -122,3 +122,31 @@ function inputCheck(){
 	}
 	document.regForm.submit();
 }
+////////////////////
+// login Page js //
+function logCheck(){
+	document.location = "Logout.jsp";
+}
+function loginCheck(){
+	var df = document.login;
+	if(df.mem_id.value==""){
+		alert("아이디를 입력해주세요");
+		df.mem_id.focus();
+		return;
+	}
+	if(df.mem_passwd.value==""){
+		alert("비밀번호를 입력해주세요");
+		df.mem_passwd.focus();
+		return;
+	}
+	df.submit();
+}
+function memberReg(){
+	document.location = "Register.jsp";
+}
+////////////////////
+// My Page js //
+function viewPage(){
+	
+	document.location = "MemberView.jsp";
+}

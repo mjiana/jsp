@@ -13,7 +13,7 @@ int totalList = zipcodeList.size();
 <head>
 <meta charset="EUC-KR">
 <title>우편번호 검색</title>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="Reg_style.css">
 <script type="text/javascript">
 function dongCheck(){
 	var dzf = document.zipForm;
@@ -35,39 +35,45 @@ function sendAddress(zipcode, area1, area2, area3, area4){
 </script>
 </head>
 <body>
-<b>우편번호 검색</b>
 <table>
 	<tr>
-		<td><br>
+		<td><b>우편번호 검색</b></td>
+	</tr>
+	<tr>
+		<td>
 		<form name="zipForm" method="post" action="ZipCheck.jsp">
-		동이름 입력 : <input type="text" name="area3">
-		<input type="button" value="검색" onclick="dongCheck()">
-		<input type="hidden" value="n" name="check">
+			동이름 입력 : <input type="text" name="area3">
+			<input type="button" value="검색" onclick="dongCheck()">
+			<input type="hidden" value="n" name="check">
 		</form>
 		</td>
 	</tr>
-	<%
-	if(check.equals("n")){
-		if(zipcodeList.isEmpty()){
-	%>
+</table>
+
+
+<table>
+<%
+if(check.equals("n")){
+	if(zipcodeList.isEmpty()){
+%>
 	<tr>
 		<td><br>검색된 결과가 없습니다.<br></td>
 	</tr>
-	<%
-		}else{
-	%>
+<%
+	}else{
+%>
 	<tr>
 		<td><br>검색 후 아래의 우편번호를 클릭하면 자동으로 입력됩니다.</td>
 	</tr>
-	<%	
-			for(int i=0; i<totalList; i++){
-				ZipcodeBean zipBean = (ZipcodeBean)zipcodeList.elementAt(i);
-				String tempZipcode = zipBean.getZipcode();
-				String tempArea1 = zipBean.getArea1();
-				String tempArea2 = zipBean.getArea2();
-				String tempArea3 = zipBean.getArea3();
-				String tempArea4 = zipBean.getArea4();
-			%>
+<%	
+	for(int i=0; i<totalList; i++){
+		ZipcodeBean zipBean = (ZipcodeBean)zipcodeList.elementAt(i);
+		String tempZipcode = zipBean.getZipcode();
+		String tempArea1 = zipBean.getArea1();
+		String tempArea2 = zipBean.getArea2();
+		String tempArea3 = zipBean.getArea3();
+		String tempArea4 = zipBean.getArea4();
+%>
 	<tr>
 		<td>
 			<a href="javascript:sendAddress('<%=tempZipcode%>','<%=tempArea1%>','<%=tempArea2%>','<%=tempArea3%>','<%=tempArea4%>')">
@@ -80,9 +86,8 @@ function sendAddress(zipcode, area1, area2, area3, area4){
 		}//if(zipcodeList.isEmpty()) else end
 	} //if(check.equals("n")) end
 	%>
-	<tr>
-		<td><br><input type="button" value="닫기" onclick="self.close()"> </td>
-	</tr>
-</table>
+</table>	
+<br>
+<p><input type="button" value="닫기" onclick="self.close()"></p>
 </body>
 </html>

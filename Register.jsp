@@ -5,7 +5,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>회원가입</title>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="Reg_style.css">
 <script type="text/javascript" src="Reg_script.js"></script>
 </head>
 <body onload="regForm.mem_id.focus()">
@@ -16,13 +16,13 @@
 		<td colspan="3"><b>회원가입</b></td>
 	</tr>
 	<tr>
-		<td width="15%">아이디</td>
-		<td width="45%">
+		<td>아이디</td>
+		<td>
 			<input type="text" name="mem_id" id="mem_id" size="20">
 			<input type="hidden" name="idCk" value="no">
 			<input type="button" value="ID중복확인" onclick="idCheck(this.form.mem_id.value)">
 		</td>
-		<td width="35%">아이디를 영어와 숫자로 적어주세요</td>
+		<td>아이디를 영어와 숫자로 적어주세요</td>
 	</tr>
 	<tr>
 		<td>비밀번호</td>
@@ -73,7 +73,7 @@
 	</tr>
 	<tr>
 		<td>주소</td>
-		<td><input type="text" name="mem_address" size="70"></td>
+		<td><input type="text" name="mem_address" size="50"></td>
 		<td>주소를 적어주세요</td>
 	</tr>
 	<tr>

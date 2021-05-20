@@ -10,17 +10,18 @@ boolean check = memMgr.checkId(mem_id);
 <head>
 <meta charset="EUC-KR">
 <title>ID중복확인</title>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="Reg_style.css">
 <script type="text/javascript">
 
 function yesId(){
-	alert("아이디를 사용합니다.");
+	//alert("아이디를 사용합니다.");
 	opener.document.regForm.mem_id.readOnly = true;
+	opener.document.regForm.mem_passwd.focus();
 	//포커스도 안잡히면 좋을텐데
 	self.close();
 }
 function noId(){
-	alert("작성한 아이디가 초기화 됩니다.");
+	//alert("작성한 아이디가 초기화 됩니다.");
 	opener.document.regForm.mem_id.readOnly = false;
 	opener.document.regForm.mem_id.value="";
 	opener.document.regForm.mem_id.focus();
